@@ -10,7 +10,7 @@ public class SegmentTree<T> {
 
     public SegmentTree(T[] arr, BinaryOperator<T> op, T initial) {
         n = arr.length;
-        int h = 33 - Integer.numberOfLeadingZeros(n - 1);
+        int h = 32 - Integer.numberOfLeadingZeros(n - 1);
         int s = 2 * (1 << h) - 1;
         tree = (T[]) new Object[s];
         this.op = op;

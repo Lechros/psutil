@@ -10,7 +10,7 @@ public class LongSegmentTree {
 
     public LongSegmentTree(long[] arr, LongBinaryOperator op, long initial) {
         n = arr.length;
-        int h = 33 - Integer.numberOfLeadingZeros(n - 1);
+        int h = 32 - Integer.numberOfLeadingZeros(n - 1);
         int s = 2 * (1 << h) - 1;
         tree = new long[s];
         this.op = op;
