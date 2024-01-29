@@ -9,13 +9,17 @@ public class SegmentTree<T> {
     private T initial;
 
     public SegmentTree(T[] arr, BinaryOperator<T> op, T initial) {
-        n = arr.length;
+        this(arr.length, op, initial);
+        build(arr);
+    }
+
+    public SegmentTree(int n, BinaryOperator<T> op, T initial) {
+        this.n = n;
         int h = 32 - Integer.numberOfLeadingZeros(n - 1);
         int s = 2 * (1 << h) - 1;
         tree = (T[]) new Object[s];
         this.op = op;
         this.initial = initial;
-        build(arr);
     }
 
     private void build(T[] arr) {
@@ -23,6 +27,10 @@ public class SegmentTree<T> {
         for (int i = n - 2; i >= 0; i--) {
             tree[i] = op.apply(tree[(i << 1) + 1], tree[(i << 1) + 2]);
         }
+    }
+
+    public void set(int index, T value) {
+        tree[index + n - 1] = value;
     }
 
     public int size() {

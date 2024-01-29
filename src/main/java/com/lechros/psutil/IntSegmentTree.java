@@ -9,20 +9,28 @@ public class IntSegmentTree {
     private int initial;
 
     public IntSegmentTree(int[] arr, IntBinaryOperator op, int initial) {
-        n = arr.length;
+        this(arr.length, op, initial);
+        build(arr);
+    }
+
+    public IntSegmentTree(int n, IntBinaryOperator op, int initial) {
+        this.n = n;
         int h = 32 - Integer.numberOfLeadingZeros(n - 1);
         int s = 2 * (1 << h) - 1;
         tree = new int[s];
         this.op = op;
         this.initial = initial;
-        build(arr);
     }
 
-    private void build(int[] arr) {
+    public void build(int[] arr) {
         System.arraycopy(arr, 0, tree, n - 1, n);
         for (int i = n - 2; i >= 0; i--) {
             tree[i] = op.applyAsInt(tree[(i << 1) + 1], tree[(i << 1) + 2]);
         }
+    }
+
+    public void set(int index, int value) {
+        tree[index + n - 1] = value;
     }
 
     public int size() {
