@@ -10,7 +10,8 @@ public class LongSegmentTree {
 
     public LongSegmentTree(long[] arr, LongBinaryOperator op, long initial) {
         this(arr.length, op, initial);
-        build(arr);
+        System.arraycopy(arr, 0, tree, n - 1, n);
+        build();
     }
 
     public LongSegmentTree(int n, LongBinaryOperator op, long initial) {
@@ -22,8 +23,7 @@ public class LongSegmentTree {
         this.initial = initial;
     }
 
-    private void build(long[] arr) {
-        if (n >= 0) System.arraycopy(arr, 0, tree, n - 1, n);
+    public void build() {
         for (int i = n - 2; i >= 0; i--) {
             tree[i] = op.applyAsLong(tree[(i << 1) + 1], tree[(i << 1) + 2]);
         }
