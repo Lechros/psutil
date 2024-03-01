@@ -7,9 +7,11 @@ import java.io.OutputStreamWriter;
 
 public class PWriter {
     private final BufferedWriter out;
+    private final char[] buf;
 
     public PWriter(OutputStream out) {
         this.out = new BufferedWriter(new OutputStreamWriter(out));
+        buf = new char[32];
     }
 
     public void flush() {
@@ -29,11 +31,41 @@ public class PWriter {
     }
 
     public void print(int i) {
-        print(i + "");
+        if (i > 0) {
+            int len = 0;
+            while (i != 0) {
+                int d = i % 10;
+                buf[len++] = (char) ('0' + d);
+                i /= 10;
+            }
+            while (len-- > 0) {
+                print(buf[len]);
+            }
+        } else if (i == 0) {
+            print('0');
+        } else {
+            print('-');
+            print(-i);
+        }
     }
 
     public void print(long l) {
-        print(l + "");
+        if (l > 0) {
+            int len = 0;
+            while (l != 0) {
+                long d = l % 10;
+                buf[len++] = (char) ('0' + d);
+                l /= 10;
+            }
+            while (len-- > 0) {
+                print(buf[len]);
+            }
+        } else if (l == 0) {
+            print('0');
+        } else {
+            print('-');
+            print(-l);
+        }
     }
 
     public void print(float f) {
@@ -66,11 +98,13 @@ public class PWriter {
     }
 
     public void println(int i) {
-        print(i + "\n");
+        print(i);
+        print('\n');
     }
 
     public void println(long l) {
-        print(l + "\n");
+        print(l);
+        print('\n');
     }
 
     public void println(float f) {
