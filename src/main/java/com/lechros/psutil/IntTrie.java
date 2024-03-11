@@ -1,7 +1,5 @@
 package com.lechros.psutil;
 
-import java.math.BigInteger;
-
 public class IntTrie {
     public final Node root;
     private final int length;
@@ -15,13 +13,17 @@ public class IntTrie {
         return length;
     }
 
+    public int msb() {
+        return 1 << (length - 1);
+    }
+
     public void add(int value) {
         if (value >= (1 << length)) {
             throw new RuntimeException();
         }
         Node node = root;
-        for (int i = length - 1; i >= 0; i--) {
-            node = node.putIfAbsent(value & (1 << i));
+        for (int bit = msb(); bit > 0; bit >>= 1) {
+            node = node.putIfAbsent(value & bit);
         }
     }
 
