@@ -42,10 +42,10 @@ public class SegmentTree<T> {
         int s = start + n - 1;
         int e = end + n - 1;
         while (s <= e) {
-            if (s % 2 == 0) {
+            if ((s & 1) == 0) {
                 res = op.apply(res, tree[s++]);
             }
-            if (e % 2 == 1) {
+            if ((e & 1) == 1) {
                 res = op.apply(res, tree[e--]);
             }
             s = (s - 1) >> 1;

@@ -42,10 +42,10 @@ public class LongSegmentTree {
         int s = start + n - 1;
         int e = end + n - 1;
         while (s <= e) {
-            if (s % 2 == 0) {
+            if ((s & 1) == 0) {
                 res = op.applyAsLong(res, tree[s++]);
             }
-            if (e % 2 == 1) {
+            if ((e & 1) == 1) {
                 res = op.applyAsLong(res, tree[e--]);
             }
             s = (s - 1) >> 1;
