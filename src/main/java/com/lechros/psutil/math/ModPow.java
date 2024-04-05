@@ -1,7 +1,7 @@
 package com.lechros.psutil.math;
 
-public class Pow {
-    public static int pow(int a, int n, int m) {
+public class ModPow {
+    public static int modPow(int a, int n, int m) {
         long res = 1L;
         a %= m;
         while (n > 0) {
@@ -14,7 +14,7 @@ public class Pow {
         return (int) res;
     }
 
-    public static long pow(long a, long n, long m) {
+    public static long modPow(long a, long n, long m) {
         long res = 1L;
         a %= m;
         while (n > 0) {
