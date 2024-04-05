@@ -1,4 +1,4 @@
-package com.lechros.psutil;
+package com.lechros.psutil.io;
 
 import java.io.IOException;
 import java.io.InputStream;
