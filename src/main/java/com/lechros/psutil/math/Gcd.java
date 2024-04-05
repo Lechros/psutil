@@ -2,29 +2,53 @@ package com.lechros.psutil.math;
 
 public class Gcd {
     public static int gcd(int a, int b) {
-        if (a < b) {
-            return gcd(b, a);
+        a = Math.abs(a);
+        if (b == 0) return a;
+        b = Math.abs(b);
+        if (a == 0) return b;
+
+        final int aZeros = Integer.numberOfTrailingZeros(a);
+        final int bZeros = Integer.numberOfTrailingZeros(b);
+        a >>>= aZeros;
+        b >>>= bZeros;
+
+        final int t = (Math.min(aZeros, bZeros));
+
+        while (a != b) {
+            if ((a + 0x80000000) > (b + 0x80000000)) {
+                a -= b;
+                a >>>= Integer.numberOfTrailingZeros(a);
+            } else {
+                b -= a;
+                b >>>= Integer.numberOfTrailingZeros(b);
+            }
         }
-        while (b > 0) {
-            int q = a / b;
-            int r = a - q * b;
-            a = b;
-            b = r;
-        }
-        return a;
+        return a << t;
     }
 
     public static long gcd(long a, long b) {
-        if (a < b) {
-            return gcd(b, a);
+        a = Math.abs(a);
+        if (b == 0) return a;
+        b = Math.abs(b);
+        if (a == 0) return b;
+
+        final int aZeros = Long.numberOfTrailingZeros(a);
+        final int bZeros = Long.numberOfTrailingZeros(b);
+        a >>>= aZeros;
+        b >>>= bZeros;
+
+        final int t = (Math.min(aZeros, bZeros));
+
+        while (a != b) {
+            if ((a + 0x8000000000000000L) > (b + 0x8000000000000000L)) {
+                a -= b;
+                a >>>= Long.numberOfTrailingZeros(a);
+            } else {
+                b -= a;
+                b >>>= Long.numberOfTrailingZeros(b);
+            }
         }
-        while (b > 0) {
-            long q = a / b;
-            long r = a - q * b;
-            a = b;
-            b = r;
-        }
-        return a;
+        return a << t;
     }
 
     // as + bt = gcd(a, b) -> return s
