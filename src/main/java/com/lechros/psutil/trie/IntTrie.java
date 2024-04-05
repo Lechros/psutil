@@ -1,4 +1,4 @@
-package com.lechros.psutil;
+package com.lechros.psutil.trie;
 
 public class IntTrie {
     public final Node root;

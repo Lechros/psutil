@@ -1,4 +1,4 @@
-package com.lechros.psutil;
+package com.lechros.psutil.trie;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
