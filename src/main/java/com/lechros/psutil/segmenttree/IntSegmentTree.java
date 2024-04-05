@@ -1,4 +1,4 @@
-package com.lechros.psutil;
+package com.lechros.psutil.segmenttree;
 
 import java.util.function.IntBinaryOperator;
 

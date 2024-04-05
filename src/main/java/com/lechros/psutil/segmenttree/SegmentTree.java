@@ -1,35 +1,35 @@
-package com.lechros.psutil;
+package com.lechros.psutil.segmenttree;
 
-import java.util.function.LongBinaryOperator;
+import java.util.function.BinaryOperator;
 
-public class LongSegmentTree {
-    private final long[] tree;
+public class SegmentTree<T> {
+    private final T[] tree;
     private final int n;
-    private final LongBinaryOperator op;
-    private final long initial;
+    private final BinaryOperator<T> op;
+    private final T initial;
 
-    public LongSegmentTree(long[] arr, LongBinaryOperator op, long initial) {
+    public SegmentTree(T[] arr, BinaryOperator<T> op, T initial) {
         this(arr.length, op, initial);
         System.arraycopy(arr, 0, tree, n, n);
         build();
     }
 
-    public LongSegmentTree(int n, LongBinaryOperator op, long initial) {
+    public SegmentTree(int n, BinaryOperator<T> op, T initial) {
         this.n = n;
         int h = 32 - Integer.numberOfLeadingZeros(n - 1);
         int s = 2 << h;
-        tree = new long[s];
+        tree = (T[]) new Object[s];
         this.op = op;
         this.initial = initial;
     }
 
     public void build() {
         for (int i = n - 1; i > 0; i--) {
-            tree[i] = op.applyAsLong(tree[i << 1], tree[(i << 1) + 1]);
+            tree[i] = op.apply(tree[i << 1], tree[(i << 1) + 1]);
         }
     }
 
-    public void set(int index, long value) {
+    public void set(int index, T value) {
         tree[index + n] = value;
     }
 
@@ -37,16 +37,16 @@ public class LongSegmentTree {
         return n;
     }
 
-    public long query(int start, int end) {
-        long res = initial;
+    public T query(int start, int end) {
+        T res = initial;
         int s = start + n;
         int e = end + n;
         while (s <= e) {
             if ((s & 1) == 1) {
-                res = op.applyAsLong(res, tree[s++]);
+                res = op.apply(res, tree[s++]);
             }
             if ((e & 1) == 0) {
-                res = op.applyAsLong(res, tree[e--]);
+                res = op.apply(res, tree[e--]);
             }
             s >>= 1;
             e >>= 1;
@@ -54,11 +54,11 @@ public class LongSegmentTree {
         return res;
     }
 
-    public void update(int index, long value) {
+    public void update(int index, T value) {
         int i = index + n;
         tree[i] = value;
         while (i > 0) {
-            tree[i >> 1] = op.applyAsLong(tree[i], tree[i + 1]);
+            tree[i >> 1] = op.apply(tree[i], tree[i + 1]);
             i >>= 1;
         }
     }
