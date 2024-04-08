@@ -22,15 +22,16 @@ public class PWriter {
         }
     }
 
-    public void print(char c) {
+    public PWriter print(char c) {
         try {
             out.write(c);
+            return this;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void print(int i) {
+    public PWriter print(int i) {
         if (i > 0) {
             int len = 0;
             while (i != 0) {
@@ -47,9 +48,10 @@ public class PWriter {
             print('-');
             print(-i);
         }
+        return this;
     }
 
-    public void print(long l) {
+    public PWriter print(long l) {
         if (l > 0) {
             int len = 0;
             while (l != 0) {
@@ -66,23 +68,25 @@ public class PWriter {
             print('-');
             print(-l);
         }
+        return this;
     }
 
-    public void print(float f) {
-        print(f + "");
+    public PWriter print(float f) {
+        return print(f + "");
     }
 
-    public void print(double d) {
-        print(d + "");
+    public PWriter print(double d) {
+        return print(d + "");
     }
 
-    public void print(Object o) {
-        print(o + "");
+    public PWriter print(Object o) {
+        return print(o + "");
     }
 
-    public void print(String s) {
+    public PWriter print(String s) {
         try {
             out.write(s);
+            return this;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
