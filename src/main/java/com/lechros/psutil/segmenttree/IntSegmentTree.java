@@ -29,6 +29,10 @@ public class IntSegmentTree {
         }
     }
 
+    public int get(int index) {
+        return tree[index + n];
+    }
+
     public void set(int index, int value) {
         tree[index + n] = value;
     }

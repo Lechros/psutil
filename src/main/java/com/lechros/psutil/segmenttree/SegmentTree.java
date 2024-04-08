@@ -29,6 +29,10 @@ public class SegmentTree<T> {
         }
     }
 
+    public T get(int index) {
+        return tree[index + n];
+    }
+
     public void set(int index, T value) {
         tree[index + n] = value;
     }

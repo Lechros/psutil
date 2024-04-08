@@ -29,6 +29,10 @@ public class LongSegmentTree {
         }
     }
 
+    public long get(int index) {
+        return tree[index + n];
+    }
+
     public void set(int index, long value) {
         tree[index + n] = value;
     }
