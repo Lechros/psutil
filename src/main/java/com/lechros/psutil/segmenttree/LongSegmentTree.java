@@ -58,8 +58,8 @@ public class LongSegmentTree {
         int i = index + n;
         tree[i] = value;
         while (i > 0) {
-            tree[i >> 1] = op.applyAsLong(tree[i], tree[i + 1]);
             i >>= 1;
+            tree[i] = op.applyAsLong(tree[i << 1], tree[(i << 1) + 1]);
         }
     }
 }

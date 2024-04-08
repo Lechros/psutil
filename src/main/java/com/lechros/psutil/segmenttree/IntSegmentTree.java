@@ -58,8 +58,8 @@ public class IntSegmentTree {
         int i = index + n;
         tree[i] = value;
         while (i > 0) {
-            tree[i >> 1] = op.applyAsInt(tree[i], tree[i + 1]);
             i >>= 1;
+            tree[i] = op.applyAsInt(tree[i << 1], tree[(i << 1) + 1]);
         }
     }
 }

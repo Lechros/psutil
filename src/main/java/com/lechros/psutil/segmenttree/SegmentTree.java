@@ -58,8 +58,8 @@ public class SegmentTree<T> {
         int i = index + n;
         tree[i] = value;
         while (i > 0) {
-            tree[i >> 1] = op.apply(tree[i], tree[i + 1]);
             i >>= 1;
+            tree[i] = op.apply(tree[i << 1], tree[(i << 1) + 1]);
         }
     }
 }
