@@ -57,7 +57,7 @@ public class IntSegmentTree {
     public void update(int index, int value) {
         int i = index + n;
         tree[i] = value;
-        while (i > 0) {
+        while (i > 1) {
             i >>= 1;
             tree[i] = op.applyAsInt(tree[i << 1], tree[(i << 1) + 1]);
         }
