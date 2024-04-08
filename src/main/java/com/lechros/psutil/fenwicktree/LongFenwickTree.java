@@ -10,7 +10,7 @@ public class LongFenwickTree {
         this.arr = arr;
         tree = new long[n + 1];
         for (int i = 0; i < n; i++) {
-            updateDiff(i + 1, arr[i]);
+            updateDiff(i, arr[i]);
         }
     }
 
@@ -41,13 +41,14 @@ public class LongFenwickTree {
         long diff = value - arr[index];
         arr[index] = value;
 
-        updateDiff(index + 1, diff);
+        updateDiff(index, diff);
     }
 
-    private void updateDiff(int index1, long diff) {
-        while (index1 <= n) {
-            tree[index1] += diff;
-            index1 += (index1 & -index1);
+    public void updateDiff(int index, long diff) {
+        index++;
+        while (index <= n) {
+            tree[index] += diff;
+            index += (index & -index);
         }
     }
 }
