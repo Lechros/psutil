@@ -39,12 +39,11 @@ public class IntFenwickTree {
 
     public void update(int index, int value) {
         int diff = value - arr[index];
-        arr[index] = value;
-
         updateDiff(index, diff);
     }
 
     public void updateDiff(int index, int diff) {
+        arr[index] += diff;
         index++;
         while (index <= n) {
             tree[index] += diff;
